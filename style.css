@@ -1,0 +1,110 @@
+body {
+    background-color: #f6f6f6;
+}
+.main {
+    width: 1150px;
+    margin: 0 auto;
+    display: flex;
+    
+}
+.control_block {
+    width: 375px;
+    margin-right: 15px;
+    
+}
+.buttons_wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.btn {
+    background: linear-gradient(to bottom, #f5f5f5 0%, #ededed 100%);
+    height: 50px;
+    width: 33%;
+    outline: none;
+    border: none;
+    box-shadow: 2px 1px 3px gray;
+    flex: 1;
+}
+.btn_active {
+    background: #d64f00;
+}
+.chessBoard {
+    width: 760px;
+    height: 760px;
+    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    position: relative;
+}
+.btn_start_game {
+    background: #2b8ae3;
+    color: #fff;
+    outline: none;
+    border: none;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 22px;
+    box-shadow: 2px 1px 3px gray;
+}
+.stat_block {
+    background-color: #fff;
+    box-shadow: 2px 1px 3px gray;
+    padding: 10px;
+    margin: 20px 0;
+
+}
+.stat_block_title {
+    text-align: center;
+    color:dimgray;
+    font-size: 25px;
+    font-family: sans-serif;
+}
+.number_text {
+    text-align: center;
+    font-size: 70px;
+    font-family: monospace;
+
+}
+.number_text_timeIsUp {
+    color: red;
+}
+
+.white_board {
+background: url("./images/white_board.png") no-repeat center / cover;
+
+}
+.black_board {
+    background: url("./images/black_board.png") no-repeat center / cover;
+}
+.chessBoard_cell {
+    width: 95px;
+    height: 95px;
+    opacity: 0;
+    transition: opacity .3s;
+    cursor: pointer;
+    
+}
+.wrong_choise {
+    background-color: red;
+    opacity: .5;
+}
+.right_choise {
+    background-color: green;
+    opacity: .5;
+}
+.cell_name {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 250px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    opacity: .7;
+    color: white;
+    text-shadow: 2px 1px 7px dimgray;
+    pointer-events: none;
+}
