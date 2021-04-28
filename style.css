@@ -26,6 +26,11 @@ body {
     border: none;
     box-shadow: 2px 1px 3px gray;
     flex: 1;
+    cursor: pointer;
+    
+}
+.btn img {
+    pointer-events: none;
 }
 .btn_active {
     background: #d64f00;
@@ -72,11 +77,11 @@ body {
     color: red;
 }
 
-.white_board {
+.white {
 background: url("./images/white_board.png") no-repeat center / cover;
 
 }
-.black_board {
+.black {
     background: url("./images/black_board.png") no-repeat center / cover;
 }
 .chessBoard_cell {
