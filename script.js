@@ -5,10 +5,13 @@ const chessBoard = document.querySelector(".chessBoard"),
     btnsWrapper = document.querySelector(".buttons_wrapper"),
     playTimerBlock = document.querySelector(".playTimer"),
     chessBoardCells = document.getElementsByClassName("chessBoard_cell"),
-    resultCount = document.querySelector(".result_count");
+    resultCount = document.querySelector(".result_count"),
+    whiteResultl = document.querySelector("#white_result"),
+    blackResult = document.querySelector("#black_result"),
+    statWrap = document.querySelector(".stat_wrap");
 
 let words = ["a", "b", "c", "d", "e", "f", "g", "h"];
-let playTimer = 30;
+let playTimer = 10;
 let targetCell = null;
 let results = {
     current: 0,
@@ -72,11 +75,16 @@ btnStart.addEventListener("click", () => {
     results.current = 0;
     let intervalId = setInterval(function () {
         if (playTimer < 0) {
+            // ИГРА ЗАВЕРШЕНА
             clearInterval(intervalId);
             playTimer = 30;
             btnStart.removeAttribute("disabled");
             document.querySelector(".cell_name").innerHTML = "";
             results[playColor].push(results.current);
+            whiteResultl.innerHTML = getAverageCount(results.white);
+            blackResult.innerHTML = getAverageCount(results.black);
+            paintChart();
+
             return;
         }
         if (playTimer < 6) {
@@ -116,3 +124,59 @@ chessBoard.addEventListener("click", (event) => {
         }
     }
 });
+
+function getAverageCount(numbers) {
+    if (!numbers.length) return 0;
+
+    return (
+        numbers.reduce((acc, currentValue) => {
+            return acc + currentValue;
+        }, 0) / numbers.length
+    );
+}
+
+function paintChart() {
+    let canvas = createNewElement("canvas", "myChart");
+    statWrap.appendChild(canvas);
+
+    var ctx = canvas.getContext("2d");
+    var myChart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels:
+                results.white.length > results.black.length
+                    ? results.white
+                    : results.black,
+            datasets: [
+                {
+                    label: "Белые",
+                    data: results.white,
+                    backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+                    borderColor: ["rgba(255, 99, 132, 1)"],
+                    borderWidth: 2,
+                    fill: true,
+                },
+                {
+                    label: "Черные",
+                    data: results.black,
+                    backgroundColor: ["rgba(255, 199, 132, 0.2)"],
+                    borderColor: ["rgba(255, 199, 132, 1)"],
+                    borderWidth: 2,
+                    fill: true,
+                },
+            ],
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false,
+                },
+            },
+            scales: {
+                x: {
+                    display: false,
+                },
+            },
+        },
+    });
+}
